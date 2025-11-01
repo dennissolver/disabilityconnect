@@ -26,6 +26,15 @@ function doPost(e) {
     if (data.serviceCountry) {
       data.serviceCountry = data.serviceCountry.trim().substring(0, 50);
     }
+    // --- NEW: Sanitize city and postcode ---
+    if (data.city) {
+      data.city = data.city.trim().substring(0, 100);
+    }
+    if (data.postcode) {
+      data.postcode = data.postcode.trim().substring(0, 20);
+    }
+    // ----------------------------------------
+
 
     const lastRow = sheet.getLastRow();
     let rowFound = false;
@@ -41,12 +50,16 @@ function doPost(e) {
           const timestamp = new Date();  // CHANGE 3: Use formatted date
           const formattedDate = Utilities.formatDate(timestamp, Session.getScriptTimeZone(), 'yyyy-MM-dd HH:mm:ss');
 
-          sheet.getRange(rowIndex, 1).setValue(formattedDate);  // Timestamp
-          sheet.getRange(rowIndex, 2).setValue(data.name || '');  // Name (full update)
-          sheet.getRange(rowIndex, 3).setValue(data.email);  // Email (already normalized)
-          sheet.getRange(rowIndex, 4).setValue(data.userCountry || '');  // User Country
-          sheet.getRange(rowIndex, 5).setValue(data.serviceCountry || '');  // Service Country
-          // Status remains unchanged
+          sheet.getRange(rowIndex, 1).setValue(formattedDate);  // Timestamp (Col 1)
+          sheet.getRange(rowIndex, 2).setValue(data.name || '');  // Name (Col 2)
+          sheet.getRange(rowIndex, 3).setValue(data.email);  // Email (Col 3)
+          sheet.getRange(rowIndex, 4).setValue(data.userCountry || '');  // User Country (Col 4)
+          sheet.getRange(rowIndex, 5).setValue(data.serviceCountry || '');  // Service Country (Col 5)
+          // --- NEW: Update city and postcode (Cols 6 & 7) ---
+          sheet.getRange(rowIndex, 6).setValue(data.city || '');
+          sheet.getRange(rowIndex, 7).setValue(data.postcode || '');
+          // ----------------------------------------------------
+          // Status remains unchanged (Col 8, assuming 2 new columns were added)
 
           rowFound = true;
           Logger.log(`Updated row ${rowIndex} for email: ${data.email}`);
@@ -60,12 +73,16 @@ function doPost(e) {
       const timestamp = new Date();
       const formattedDate = Utilities.formatDate(timestamp, Session.getScriptTimeZone(), 'yyyy-MM-dd HH:mm:ss');
       sheet.appendRow([
-        formattedDate,  // Timestamp
-        data.name || '',
-        data.email,
-        data.userCountry || '',
-        data.serviceCountry || 'Not yet selected',
-        'Active'
+        formattedDate,  // Timestamp (Col 1)
+        data.name || '',  // Name (Col 2)
+        data.email,  // Email (Col 3)
+        data.userCountry || '',  // User Country (Col 4)
+        data.serviceCountry || 'Not yet selected',  // Service Country (Col 5)
+        // --- NEW: Append city and postcode (Cols 6 & 7) ---
+        data.city || '',
+        data.postcode || '',
+        // ----------------------------------------------------
+        'Active' // Status (Col 8)
       ]);
       Logger.log(`Added new row for email: ${data.email}`);
     }

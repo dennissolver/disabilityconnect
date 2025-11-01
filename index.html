@@ -185,12 +185,6 @@
             border-top: 2px solid #f0f0f0;
         }
 
-        .contact-info h4 {
-            color: #667eea;
-            margin-bottom: 15px;
-            font-size: 18px;
-        }
-
         .contact-item {
             margin: 12px 0;
             display: flex;
@@ -590,7 +584,8 @@
 
         <!-- Dennis Profile -->
         <div class="dennis-profile">
-            <img src="dennis-photo.jpg" alt="Dennis McMahon">
+            <!-- UPDATED IMAGE SOURCE TO MATCH UPLOADED FILE NAME -->
+            <img src="dennis photo cropped 22102025.jpg-4df581ac-051e-49a0-b4cb-13da03a639ed" alt="Dennis McMahon">
             <h3>Dennis McMahon</h3>
             <p class="title">Founder & Creator</p>
 
@@ -868,6 +863,16 @@
                 </div>
 
                 <div class="form-group">
+                    <label for="city">City / State / Province (Optional)</label>
+                    <input type="text" id="city" name="city" placeholder="e.g., Sydney, NSW or London, UK">
+                </div>
+
+                <div class="form-group">
+                    <label for="postcode">Postcode / Zip Code (Optional)</label>
+                    <input type="text" id="postcode" name="postcode" placeholder="e.g., 2000 or 90210">
+                </div>
+
+                <div class="form-group">
                     <label for="serviceCountry">Which Country's Services Do You Need? *</label>
                     <select id="serviceCountry" name="serviceCountry" required>
                         <option value="">Select service country...</option>
@@ -951,7 +956,7 @@
                         <option value="India">India</option>
                         <option value="Indonesia">Indonesia</option>
                         <option value="Iran">Iran</option>
-                        <option value="Iraq">Iraq</option>
+                        <option value="Iraq">Iraq</spt>
                         <option value="Ireland">Ireland</option>
                         <option value="Israel">Israel</option>
                         <option value="Italy">Italy</option>
@@ -1075,16 +1080,18 @@
         </div>
 
         <!-- Chat Interface -->
-        <div class="chat-section" id="chatSection">
-            <div class="chat-header">
-                <h2>💬 Chat with DisabilityConnect</h2>
-                <p>Ask me about disability services, funding, and support</p>
-            </div>
-            <div class="chat-container" id="chatContainer"></div>
-            <div class="input-area">
-                <div class="input-wrapper">
-                    <textarea id="userInput" rows="2" placeholder="Type your question here..."></textarea>
-                    <button class="btn-send" onclick="sendMessage()">Send</button>
+        <div class="container">
+            <div class="chat-section" id="chatSection">
+                <div class="chat-header">
+                    <h2>💬 Chat with DisabilityConnect</h2>
+                    <p>Ask me about disability services, funding, and support</p>
+                </div>
+                <div class="chat-container" id="chatContainer"></div>
+                <div class="input-area">
+                    <div class="input-wrapper">
+                        <textarea id="userInput" rows="2" placeholder="Type your question here..."></textarea>
+                        <button class="btn-send" onclick="sendMessage()">Send</button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -1121,6 +1128,10 @@
                 email: document.getElementById('email').value,
                 userCountry: document.getElementById('userCountry').value,
                 serviceCountry: document.getElementById('serviceCountry').value,
+                // --- NEW FIELDS ADDED ---
+                city: document.getElementById('city').value,
+                postcode: document.getElementById('postcode').value,
+                // ------------------------
                 timestamp: new Date().toISOString()
             };
 
@@ -1143,7 +1154,8 @@
             document.getElementById('chatSection').classList.add('active');
 
             // Send welcome message
-            const welcomeMsg = `Hello ${userData.name}! 👋\n\nI'm here to help you find disability services in ${userData.serviceCountry}. I can assist with:\n\n• Finding relevant services and programs\n• Understanding eligibility requirements\n• Navigating application processes\n• Connecting with support organizations\n\nWhat would you like to know about?`;
+            const locationDetail = userData.city ? ` in ${userData.city}, ${userData.serviceCountry}` : ` in ${userData.serviceCountry}`;
+            const welcomeMsg = `Hello ${userData.name}! 👋\n\nI'm here to help you find disability services${locationDetail}. I can assist with:\n\n• Finding relevant services and programs\n• Understanding eligibility requirements\n• Navigating application processes\n• Connecting with support organizations\n\nWhat would you like to know about?`;
 
             addMessage(welcomeMsg, 'assistant');
         });
@@ -1176,7 +1188,11 @@
                     body: JSON.stringify({
                         messages: conversationHistory,
                         country: userData.serviceCountry,
-                        userName: userData.name
+                        userName: userData.name,
+                        // --- NEW FIELDS ADDED TO API CALL ---
+                        city: userData.city,
+                        postcode: userData.postcode
+                        // ------------------------------------
                     })
                 });
 
