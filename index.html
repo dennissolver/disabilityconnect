@@ -1,0 +1,1244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DisabilityConnect - Find Your Support Services</title>
+    <meta name="description" content="Get personalized guidance on disability services and support programs worldwide">
+    <script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
+            background-color: #f5f5f5;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        /* Google Translate Widget */
+        #google_translate_element {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            z-index: 1000;
+            background: white;
+            padding: 5px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+
+        /* Welcome Hero Section */
+        .hero-section {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 50px 20px;
+            text-align: center;
+        }
+
+        .hero-section h1 {
+            font-size: 42px;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+
+        .hero-section .tagline {
+            font-size: 22px;
+            margin-bottom: 20px;
+            opacity: 0.95;
+        }
+
+        .hero-section .subtitle {
+            font-size: 16px;
+            max-width: 800px;
+            margin: 0 auto;
+            opacity: 0.9;
+        }
+
+        /* About Section */
+        .about-section {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 0 20px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: start;
+        }
+
+        @media (max-width: 968px) {
+            .about-section {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .about-content {
+            background: white;
+            padding: 35px;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .about-content h2 {
+            color: #667eea;
+            margin-bottom: 20px;
+            font-size: 28px;
+        }
+
+        .about-content h3 {
+            color: #764ba2;
+            margin-top: 25px;
+            margin-bottom: 15px;
+            font-size: 20px;
+        }
+
+        .about-content p {
+            margin-bottom: 15px;
+            font-size: 16px;
+            line-height: 1.8;
+            color: #555;
+        }
+
+        .about-content ul {
+            margin-left: 20px;
+            margin-bottom: 15px;
+        }
+
+        .about-content li {
+            margin-bottom: 10px;
+            line-height: 1.7;
+            color: #555;
+        }
+
+        .highlight-box {
+            background: #f8f9ff;
+            border-left: 4px solid #667eea;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+
+        .highlight-box strong {
+            color: #667eea;
+        }
+
+        /* Dennis Profile Section */
+        .dennis-profile {
+            background: white;
+            padding: 35px;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            text-align: center;
+            position: sticky;
+            top: 20px;
+        }
+
+        .dennis-profile img {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 5px solid #667eea;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+        }
+
+        .dennis-profile h3 {
+            color: #667eea;
+            font-size: 26px;
+            margin-bottom: 5px;
+        }
+
+        .dennis-profile .title {
+            color: #764ba2;
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+
+        .dennis-profile .bio {
+            text-align: left;
+            font-size: 15px;
+            line-height: 1.8;
+            margin-bottom: 20px;
+            color: #555;
+        }
+
+        .personal-message {
+            background: #f8f9ff;
+            border-left: 4px solid #667eea;
+            padding: 15px;
+            margin: 20px 0;
+            font-style: italic;
+            color: #555;
+            text-align: left;
+            font-size: 14px;
+        }
+
+        .contact-info {
+            margin-top: 25px;
+            padding-top: 25px;
+            border-top: 2px solid #f0f0f0;
+        }
+
+        .contact-info h4 {
+            color: #667eea;
+            margin-bottom: 15px;
+            font-size: 18px;
+        }
+
+        .contact-item {
+            margin: 12px 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 8px;
+            transition: background 0.3s;
+            border-radius: 6px;
+        }
+
+        .contact-item:hover {
+            background: #f8f9ff;
+        }
+
+        .contact-item a {
+            color: #667eea;
+            text-decoration: none;
+            font-size: 14px;
+            transition: color 0.3s;
+            word-break: break-all;
+        }
+
+        .contact-item a:hover {
+            color: #764ba2;
+            text-decoration: underline;
+        }
+
+        .contact-icon {
+            font-size: 20px;
+            min-width: 24px;
+        }
+
+        /* Coverage Info Box */
+        .coverage-info {
+            max-width: 1200px;
+            margin: 30px auto;
+            padding: 0 20px;
+        }
+
+        .info-box {
+            background: linear-gradient(135deg, #fff5e6 0%, #ffe6f0 100%);
+            border-left: 5px solid #ff9800;
+            padding: 25px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+        }
+
+        .info-box h3 {
+            color: #e65100;
+            margin-bottom: 15px;
+            font-size: 22px;
+        }
+
+        .info-box p {
+            color: #555;
+            line-height: 1.8;
+            margin-bottom: 12px;
+            font-size: 15px;
+        }
+
+        .info-box strong {
+            color: #e65100;
+        }
+
+        /* Registration Form Section */
+        .container {
+            max-width: 900px;
+            margin: 0 auto 40px;
+            padding: 20px;
+        }
+
+        .registration-section {
+            background: white;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+        }
+
+        .registration-section h2 {
+            color: #667eea;
+            margin-bottom: 15px;
+            font-size: 28px;
+            text-align: center;
+        }
+
+        .why-register {
+            background: #f8f9ff;
+            padding: 25px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+        }
+
+        .why-register h3 {
+            color: #764ba2;
+            margin-bottom: 15px;
+            font-size: 20px;
+        }
+
+        .why-register ul {
+            margin-left: 25px;
+            color: #555;
+        }
+
+        .why-register li {
+            margin-bottom: 10px;
+            line-height: 1.7;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 15px;
+            transition: border-color 0.3s;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        .form-group select option.core-country {
+            background-color: #e8eaf6;
+            font-weight: 600;
+        }
+
+        .btn-submit {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .btn-submit:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn-submit:active {
+            transform: translateY(0);
+        }
+
+        /* Chat Interface */
+        .chat-section {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.1);
+            display: none;
+            flex-direction: column;
+            height: 600px;
+        }
+
+        .chat-section.active {
+            display: flex;
+        }
+
+        .chat-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 12px 12px 0 0;
+            text-align: center;
+        }
+
+        .chat-header h2 {
+            font-size: 22px;
+            margin-bottom: 5px;
+        }
+
+        .chat-header p {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+
+        .chat-container {
+            flex: 1;
+            padding: 20px;
+            overflow-y: auto;
+            background: #fafafa;
+        }
+
+        .message {
+            margin: 15px 0;
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            animation: fadeIn 0.3s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .message.user {
+            flex-direction: row-reverse;
+        }
+
+        .message-content {
+            max-width: 75%;
+            padding: 14px 18px;
+            border-radius: 16px;
+            word-wrap: break-word;
+            white-space: pre-wrap;
+        }
+
+        .message.assistant .message-content {
+            background-color: white;
+            border: 1px solid #e0e0e0;
+            border-bottom-left-radius: 4px;
+        }
+
+        .message.user .message-content {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-bottom-right-radius: 4px;
+        }
+
+        .message-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            flex-shrink: 0;
+            font-size: 18px;
+        }
+
+        .message.assistant .message-icon {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .message.user .message-icon {
+            background-color: #e0e0e0;
+            color: #666;
+        }
+
+        .loading {
+            display: inline-block;
+        }
+
+        .loading::after {
+            content: '...';
+            animation: dots 1.5s steps(4, end) infinite;
+        }
+
+        @keyframes dots {
+            0%, 20% { content: '.'; }
+            40% { content: '..'; }
+            60%, 100% { content: '...'; }
+        }
+
+        .input-area {
+            padding: 20px;
+            background: white;
+            border-top: 1px solid #ddd;
+            border-radius: 0 0 12px 12px;
+        }
+
+        .input-wrapper {
+            display: flex;
+            gap: 10px;
+        }
+
+        #userInput {
+            flex: 1;
+            padding: 12px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 15px;
+            resize: none;
+            font-family: inherit;
+        }
+
+        #userInput:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        .btn-send {
+            padding: 12px 24px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        .btn-send:hover {
+            transform: scale(1.05);
+        }
+
+        .btn-send:active {
+            transform: scale(0.98);
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 30px 20px;
+            color: #666;
+            font-size: 14px;
+        }
+
+        footer a {
+            color: #667eea;
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div id="google_translate_element"></div>
+
+    <!-- Hero Section -->
+    <div class="hero-section">
+        <h1>🤝 DisabilityConnect</h1>
+        <p class="tagline">Your Guide to Disability Services & Support Worldwide</p>
+        <p class="subtitle">Connecting people with disabilities to the services, funding, and support they need to live their best lives</p>
+    </div>
+
+    <!-- About Section -->
+    <div class="about-section">
+        <div class="about-content">
+            <h2>Welcome to DisabilityConnect</h2>
+
+            <p>Navigating disability services can be overwhelming. DisabilityConnect is here to make it easier. Whether you're seeking funding for equipment, housing support, employment services, or daily living assistance, our AI-powered advisor helps you find exactly what you need.</p>
+
+            <h3>🎯 What We Offer</h3>
+            <ul>
+                <li><strong>Personalized Guidance:</strong> Our AI advisor asks the right questions to understand your unique situation</li>
+                <li><strong>Comprehensive Service Matching:</strong> Access information on disability services, funding programs, and support organizations</li>
+                <li><strong>Expert Knowledge:</strong> Detailed information for UK, Australia, US, and Canada, plus general guidance for 195+ countries</li>
+                <li><strong>Human Connection:</strong> For specific country inquiries, we follow up personally with tailored resources and support</li>
+                <li><strong>Completely Free:</strong> No cost, no obligations—just help when you need it</li>
+            </ul>
+
+            <h3>🌍 Our Coverage</h3>
+            <div class="highlight-box">
+                <p><strong>In-Depth Coverage:</strong> United Kingdom, Australia, United States, and Canada</p>
+                <p>For these countries, our AI has extensive knowledge of national and regional disability services, funding schemes, eligibility criteria, and application processes.</p>
+            </div>
+
+            <p><strong>General Support:</strong> We provide general guidance for all other countries and can research specific services upon request. When you register from any country, we'll follow up personally to provide more detailed information and resources.</p>
+
+            <h3>💡 How It Works</h3>
+            <ul>
+                <li><strong>Step 1:</strong> Fill out the quick registration form below</li>
+                <li><strong>Step 2:</strong> Chat with our AI advisor about your needs</li>
+                <li><strong>Step 3:</strong> Receive personalized service recommendations</li>
+                <li><strong>Step 4:</strong> Get follow-up support from our team</li>
+            </ul>
+
+            <h3>🔒 Why We Need Your Details</h3>
+            <p>We ask for your information so we can:</p>
+            <ul>
+                <li><strong>Follow up personally</strong> with additional resources and support</li>
+                <li><strong>Connect you</strong> with relevant services and organizations</li>
+                <li><strong>Provide ongoing support</strong> as you navigate the system</li>
+                <li><strong>Improve our service</strong> based on real user needs</li>
+                <li><strong>Build a community</strong> of support and shared knowledge</li>
+            </ul>
+
+            <p><em>Your information is kept confidential and will never be shared without your permission.</em></p>
+        </div>
+
+        <!-- Dennis Profile -->
+        <div class="dennis-profile">
+            <img src="dennis-photo.jpg" alt="Dennis McMahon">
+            <h3>Dennis McMahon</h3>
+            <p class="title">Founder & Creator</p>
+
+            <div class="personal-message">
+                <p><strong>"It's me talking to you."</strong></p>
+                <p>I created DisabilityConnect because I've seen firsthand how difficult it can be to navigate disability services. My work in Specialist Disability Accommodation (SDA) homes in Australia opened my eyes to the challenges people face in finding the right support.</p>
+            </div>
+
+            <div class="bio">
+                <p><strong>About Dennis:</strong></p>
+                <p>With current experience in the disability sector, particularly with strong partnerships in the Specialist Disability Accommodation (SDA) homes in Australia, I understand the complexities of disability services and funding systems.</p>
+
+                <p>My strategic partners (Uwe Jacobs from Property Friends - a true guru in this space - if you need a speaker on this topic, let me know and I'll hook you up!:) who has worked closely with participants, support coordinators, and service providers over many years to create housing solutions that genuinely improve lives. Working with experts like Uwe - and personal experience within my own extended family - has shown me that many people struggle to find the services they're eligible for—not because the services don't exist, but because the system is complicated and overwhelming.</p>
+
+                <p>DisabilityConnect is my way of making this easier for everyone, everywhere.</p>
+            </div>
+
+            <div class="contact-info">
+                <h4>Get in Touch</h4>
+                <div class="contact-item">
+                    <span class="contact-icon">💼</span>
+                    <a href="https://www.linkedin.com/in/denniskl/" target="_blank">LinkedIn Profile</a>
+                </div>
+                <div class="contact-item">
+                    <span class="contact-icon">📱</span>
+                    <a href="https://wa.me/61402612471" target="_blank">WhatsApp: +61 402 612 471</a>
+                </div>
+                <div class="contact-item">
+                    <span class="contact-icon">📧</span>
+                    <a href="mailto:dennis.mcmahon@global-buildtech.com">dennis.mcmahon@global-buildtech.com</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Coverage Info Box -->
+    <div class="coverage-info">
+        <div class="info-box">
+            <h3>ℹ️ Important Information About Service Coverage</h3>
+            <p><strong>Comprehensive Coverage Countries:</strong> UK 🇬🇧 | Australia 🇦🇺 | United States 🇺🇸 | Canada 🇨🇦</p>
+            <p>Our AI advisor has detailed, up-to-date information about disability services in these four countries, including national programs, regional services, eligibility criteria, and application processes.</p>
+            <p><strong>All Other Countries:</strong> We can provide general guidance and advice based on common disability service frameworks. When you register from any country, <strong>we personally follow up with researched, specific information</strong> about services available in your location.</p>
+            <p><strong>No matter where you are, we're here to help you find the support you need.</strong></p>
+        </div>
+    </div>
+
+    <!-- Registration Form -->
+    <div class="container">
+        <div class="registration-section">
+            <h2>Start Your Journey Today</h2>
+
+            <div class="why-register">
+                <h3>🌟 Why Register?</h3>
+                <ul>
+                    <li>Get instant access to our AI-powered service advisor</li>
+                    <li>Receive personalized recommendations based on your situation</li>
+                    <li>Get personal follow-up with additional resources</li>
+                    <li>Connect with relevant services and support organizations</li>
+                    <li>Join a community of people supporting each other</li>
+                </ul>
+            </div>
+
+            <form id="registrationForm">
+                <div class="form-group">
+                    <label for="name">Your Name *</label>
+                    <input type="text" id="name" name="name" required placeholder="Enter your name">
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Email Address *</label>
+                    <input type="email" id="email" name="email" required placeholder="your.email@example.com">
+                </div>
+
+                <div class="form-group">
+                    <label for="userCountry">Your Country *</label>
+                    <select id="userCountry" name="userCountry" required>
+                        <option value="">Select your country...</option>
+                        <option value="United Kingdom" class="core-country">🇬🇧 United Kingdom (Detailed Coverage)</option>
+                        <option value="Australia" class="core-country">🇦🇺 Australia (Detailed Coverage)</option>
+                        <option value="United States" class="core-country">🇺🇸 United States (Detailed Coverage)</option>
+                        <option value="Canada" class="core-country">🇨🇦 Canada (Detailed Coverage)</option>
+                        <option value="" disabled>──────────</option>
+                        <option value="Afghanistan">Afghanistan</option>
+                        <option value="Albania">Albania</option>
+                        <option value="Algeria">Algeria</option>
+                        <option value="Andorra">Andorra</option>
+                        <option value="Angola">Angola</option>
+                        <option value="Antigua and Barbuda">Antigua and Barbuda</option>
+                        <option value="Argentina">Argentina</option>
+                        <option value="Armenia">Armenia</option>
+                        <option value="Austria">Austria</option>
+                        <option value="Azerbaijan">Azerbaijan</option>
+                        <option value="Bahamas">Bahamas</option>
+                        <option value="Bahrain">Bahrain</option>
+                        <option value="Bangladesh">Bangladesh</option>
+                        <option value="Barbados">Barbados</option>
+                        <option value="Belarus">Belarus</option>
+                        <option value="Belgium">Belgium</option>
+                        <option value="Belize">Belize</option>
+                        <option value="Benin">Benin</option>
+                        <option value="Bhutan">Bhutan</option>
+                        <option value="Bolivia">Bolivia</option>
+                        <option value="Bosnia and Herzegovina">Bosnia and Herzegovina</option>
+                        <option value="Botswana">Botswana</option>
+                        <option value="Brazil">Brazil</option>
+                        <option value="Brunei">Brunei</option>
+                        <option value="Bulgaria">Bulgaria</option>
+                        <option value="Burkina Faso">Burkina Faso</option>
+                        <option value="Burundi">Burundi</option>
+                        <option value="Cabo Verde">Cabo Verde</option>
+                        <option value="Cambodia">Cambodia</option>
+                        <option value="Cameroon">Cameroon</option>
+                        <option value="Central African Republic">Central African Republic</option>
+                        <option value="Chad">Chad</option>
+                        <option value="Chile">Chile</option>
+                        <option value="China">China</option>
+                        <option value="Colombia">Colombia</option>
+                        <option value="Comoros">Comoros</option>
+                        <option value="Congo">Congo</option>
+                        <option value="Costa Rica">Costa Rica</option>
+                        <option value="Croatia">Croatia</option>
+                        <option value="Cuba">Cuba</option>
+                        <option value="Cyprus">Cyprus</option>
+                        <option value="Czech Republic">Czech Republic</option>
+                        <option value="Denmark">Denmark</option>
+                        <option value="Djibouti">Djibouti</option>
+                        <option value="Dominica">Dominica</option>
+                        <option value="Dominican Republic">Dominican Republic</option>
+                        <option value="Ecuador">Ecuador</option>
+                        <option value="Egypt">Egypt</option>
+                        <option value="El Salvador">El Salvador</option>
+                        <option value="Equatorial Guinea">Equatorial Guinea</option>
+                        <option value="Eritrea">Eritrea</option>
+                        <option value="Estonia">Estonia</option>
+                        <option value="Eswatini">Eswatini</option>
+                        <option value="Ethiopia">Ethiopia</option>
+                        <option value="Fiji">Fiji</option>
+                        <option value="Finland">Finland</option>
+                        <option value="France">France</option>
+                        <option value="Gabon">Gabon</option>
+                        <option value="Gambia">Gambia</option>
+                        <option value="Georgia">Georgia</option>
+                        <option value="Germany">Germany</option>
+                        <option value="Ghana">Ghana</option>
+                        <option value="Greece">Greece</option>
+                        <option value="Grenada">Grenada</option>
+                        <option value="Guatemala">Guatemala</option>
+                        <option value="Guinea">Guinea</option>
+                        <option value="Guinea-Bissau">Guinea-Bissau</option>
+                        <option value="Guyana">Guyana</option>
+                        <option value="Haiti">Haiti</option>
+                        <option value="Honduras">Honduras</option>
+                        <option value="Hungary">Hungary</option>
+                        <option value="Iceland">Iceland</option>
+                        <option value="India">India</option>
+                        <option value="Indonesia">Indonesia</option>
+                        <option value="Iran">Iran</option>
+                        <option value="Iraq">Iraq</option>
+                        <option value="Ireland">Ireland</option>
+                        <option value="Israel">Israel</option>
+                        <option value="Italy">Italy</option>
+                        <option value="Jamaica">Jamaica</option>
+                        <option value="Japan">Japan</option>
+                        <option value="Jordan">Jordan</option>
+                        <option value="Kazakhstan">Kazakhstan</option>
+                        <option value="Kenya">Kenya</option>
+                        <option value="Kiribati">Kiribati</option>
+                        <option value="Kosovo">Kosovo</option>
+                        <option value="Kuwait">Kuwait</option>
+                        <option value="Kyrgyzstan">Kyrgyzstan</option>
+                        <option value="Laos">Laos</option>
+                        <option value="Latvia">Latvia</option>
+                        <option value="Lebanon">Lebanon</option>
+                        <option value="Lesotho">Lesotho</option>
+                        <option value="Liberia">Liberia</option>
+                        <option value="Libya">Libya</option>
+                        <option value="Liechtenstein">Liechtenstein</option>
+                        <option value="Lithuania">Lithuania</option>
+                        <option value="Luxembourg">Luxembourg</option>
+                        <option value="Madagascar">Madagascar</option>
+                        <option value="Malawi">Malawi</option>
+                        <option value="Malaysia">Malaysia</option>
+                        <option value="Maldives">Maldives</option>
+                        <option value="Mali">Mali</option>
+                        <option value="Malta">Malta</option>
+                        <option value="Marshall Islands">Marshall Islands</option>
+                        <option value="Mauritania">Mauritania</option>
+                        <option value="Mauritius">Mauritius</option>
+                        <option value="Mexico">Mexico</option>
+                        <option value="Micronesia">Micronesia</option>
+                        <option value="Moldova">Moldova</option>
+                        <option value="Monaco">Monaco</option>
+                        <option value="Mongolia">Mongolia</option>
+                        <option value="Montenegro">Montenegro</option>
+                        <option value="Morocco">Morocco</option>
+                        <option value="Mozambique">Mozambique</option>
+                        <option value="Myanmar">Myanmar</option>
+                        <option value="Namibia">Namibia</option>
+                        <option value="Nauru">Nauru</option>
+                        <option value="Nepal">Nepal</option>
+                        <option value="Netherlands">Netherlands</option>
+                        <option value="New Zealand">New Zealand</option>
+                        <option value="Nicaragua">Nicaragua</option>
+                        <option value="Niger">Niger</option>
+                        <option value="Nigeria">Nigeria</option>
+                        <option value="North Korea">North Korea</option>
+                        <option value="North Macedonia">North Macedonia</option>
+                        <option value="Norway">Norway</option>
+                        <option value="Oman">Oman</option>
+                        <option value="Pakistan">Pakistan</option>
+                        <option value="Palau">Palau</option>
+                        <option value="Palestine">Palestine</option>
+                        <option value="Panama">Panama</option>
+                        <option value="Papua New Guinea">Papua New Guinea</option>
+                        <option value="Paraguay">Paraguay</option>
+                        <option value="Peru">Peru</option>
+                        <option value="Philippines">Philippines</option>
+                        <option value="Poland">Poland</option>
+                        <option value="Portugal">Portugal</option>
+                        <option value="Qatar">Qatar</option>
+                        <option value="Romania">Romania</option>
+                        <option value="Russia">Russia</option>
+                        <option value="Rwanda">Rwanda</option>
+                        <option value="Saint Kitts and Nevis">Saint Kitts and Nevis</option>
+                        <option value="Saint Lucia">Saint Lucia</option>
+                        <option value="Saint Vincent and the Grenadines">Saint Vincent and the Grenadines</option>
+                        <option value="Samoa">Samoa</option>
+                        <option value="San Marino">San Marino</option>
+                        <option value="Sao Tome and Principe">Sao Tome and Principe</option>
+                        <option value="Saudi Arabia">Saudi Arabia</option>
+                        <option value="Senegal">Senegal</option>
+                        <option value="Serbia">Serbia</option>
+                        <option value="Seychelles">Seychelles</option>
+                        <option value="Sierra Leone">Sierra Leone</option>
+                        <option value="Singapore">Singapore</option>
+                        <option value="Slovakia">Slovakia</option>
+                        <option value="Slovenia">Slovenia</option>
+                        <option value="Solomon Islands">Solomon Islands</option>
+                        <option value="Somalia">Somalia</option>
+                        <option value="South Africa">South Africa</option>
+                        <option value="South Korea">South Korea</option>
+                        <option value="South Sudan">South Sudan</option>
+                        <option value="Spain">Spain</option>
+                        <option value="Sri Lanka">Sri Lanka</option>
+                        <option value="Sudan">Sudan</option>
+                        <option value="Suriname">Suriname</option>
+                        <option value="Sweden">Sweden</option>
+                        <option value="Switzerland">Switzerland</option>
+                        <option value="Syria">Syria</option>
+                        <option value="Taiwan">Taiwan</option>
+                        <option value="Tajikistan">Tajikistan</option>
+                        <option value="Tanzania">Tanzania</option>
+                        <option value="Thailand">Thailand</option>
+                        <option value="Timor-Leste">Timor-Leste</option>
+                        <option value="Togo">Togo</option>
+                        <option value="Tonga">Tonga</option>
+                        <option value="Trinidad and Tobago">Trinidad and Tobago</option>
+                        <option value="Tunisia">Tunisia</option>
+                        <option value="Turkey">Turkey</option>
+                        <option value="Turkmenistan">Turkmenistan</option>
+                        <option value="Tuvalu">Tuvalu</option>
+                        <option value="Uganda">Uganda</option>
+                        <option value="Ukraine">Ukraine</option>
+                        <option value="United Arab Emirates">United Arab Emirates</option>
+                        <option value="Uruguay">Uruguay</option>
+                        <option value="Uzbekistan">Uzbekistan</option>
+                        <option value="Vanuatu">Vanuatu</option>
+                        <option value="Vatican City">Vatican City</option>
+                        <option value="Venezuela">Venezuela</option>
+                        <option value="Vietnam">Vietnam</option>
+                        <option value="Yemen">Yemen</option>
+                        <option value="Zambia">Zambia</option>
+                        <option value="Zimbabwe">Zimbabwe</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="serviceCountry">Which Country's Services Do You Need? *</label>
+                    <select id="serviceCountry" name="serviceCountry" required>
+                        <option value="">Select service country...</option>
+                        <option value="United Kingdom" class="core-country">🇬🇧 United Kingdom (Detailed Coverage)</option>
+                        <option value="Australia" class="core-country">🇦🇺 Australia (Detailed Coverage)</option>
+                        <option value="United States" class="core-country">🇺🇸 United States (Detailed Coverage)</option>
+                        <option value="Canada" class="core-country">🇨🇦 Canada (Detailed Coverage)</option>
+                        <option value="" disabled>──────────</option>
+                        <option value="Afghanistan">Afghanistan</option>
+                        <option value="Albania">Albania</option>
+                        <option value="Algeria">Algeria</option>
+                        <option value="Andorra">Andorra</option>
+                        <option value="Angola">Angola</option>
+                        <option value="Antigua and Barbuda">Antigua and Barbuda</option>
+                        <option value="Argentina">Argentina</option>
+                        <option value="Armenia">Armenia</option>
+                        <option value="Austria">Austria</option>
+                        <option value="Azerbaijan">Azerbaijan</option>
+                        <option value="Bahamas">Bahamas</option>
+                        <option value="Bahrain">Bahrain</option>
+                        <option value="Bangladesh">Bangladesh</option>
+                        <option value="Barbados">Barbados</option>
+                        <option value="Belarus">Belarus</option>
+                        <option value="Belgium">Belgium</option>
+                        <option value="Belize">Belize</option>
+                        <option value="Benin">Benin</option>
+                        <option value="Bhutan">Bhutan</option>
+                        <option value="Bolivia">Bolivia</option>
+                        <option value="Bosnia and Herzegovina">Bosnia and Herzegovina</option>
+                        <option value="Botswana">Botswana</option>
+                        <option value="Brazil">Brazil</option>
+                        <option value="Brunei">Brunei</option>
+                        <option value="Bulgaria">Bulgaria</option>
+                        <option value="Burkina Faso">Burkina Faso</option>
+                        <option value="Burundi">Burundi</option>
+                        <option value="Cabo Verde">Cabo Verde</option>
+                        <option value="Cambodia">Cambodia</option>
+                        <option value="Cameroon">Cameroon</option>
+                        <option value="Central African Republic">Central African Republic</option>
+                        <option value="Chad">Chad</option>
+                        <option value="Chile">Chile</option>
+                        <option value="China">China</option>
+                        <option value="Colombia">Colombia</option>
+                        <option value="Comoros">Comoros</option>
+                        <option value="Congo">Congo</option>
+                        <option value="Costa Rica">Costa Rica</option>
+                        <option value="Croatia">Croatia</option>
+                        <option value="Cuba">Cuba</option>
+                        <option value="Cyprus">Cyprus</option>
+                        <option value="Czech Republic">Czech Republic</option>
+                        <option value="Denmark">Denmark</option>
+                        <option value="Djibouti">Djibouti</option>
+                        <option value="Dominica">Dominica</option>
+                        <option value="Dominican Republic">Dominican Republic</option>
+                        <option value="Ecuador">Ecuador</option>
+                        <option value="Egypt">Egypt</option>
+                        <option value="El Salvador">El Salvador</option>
+                        <option value="Equatorial Guinea">Equatorial Guinea</option>
+                        <option value="Eritrea">Eritrea</option>
+                        <option value="Estonia">Estonia</option>
+                        <option value="Eswatini">Eswatini</option>
+                        <option value="Ethiopia">Ethiopia</option>
+                        <option value="Fiji">Fiji</option>
+                        <option value="Finland">Finland</option>
+                        <option value="France">France</option>
+                        <option value="Gabon">Gabon</option>
+                        <option value="Gambia">Gambia</option>
+                        <option value="Georgia">Georgia</option>
+                        <option value="Germany">Germany</option>
+                        <option value="Ghana">Ghana</option>
+                        <option value="Greece">Greece</option>
+                        <option value="Grenada">Grenada</option>
+                        <option value="Guatemala">Guatemala</option>
+                        <option value="Guinea">Guinea</option>
+                        <option value="Guinea-Bissau">Guinea-Bissau</option>
+                        <option value="Guyana">Guyana</option>
+                        <option value="Haiti">Haiti</option>
+                        <option value="Honduras">Honduras</option>
+                        <option value="Hungary">Hungary</option>
+                        <option value="Iceland">Iceland</option>
+                        <option value="India">India</option>
+                        <option value="Indonesia">Indonesia</option>
+                        <option value="Iran">Iran</option>
+                        <option value="Iraq">Iraq</option>
+                        <option value="Ireland">Ireland</option>
+                        <option value="Israel">Israel</option>
+                        <option value="Italy">Italy</option>
+                        <option value="Jamaica">Jamaica</option>
+                        <option value="Japan">Japan</option>
+                        <option value="Jordan">Jordan</option>
+                        <option value="Kazakhstan">Kazakhstan</option>
+                        <option value="Kenya">Kenya</option>
+                        <option value="Kiribati">Kiribati</option>
+                        <option value="Kosovo">Kosovo</option>
+                        <option value="Kuwait">Kuwait</option>
+                        <option value="Kyrgyzstan">Kyrgyzstan</option>
+                        <option value="Laos">Laos</option>
+                        <option value="Latvia">Latvia</option>
+                        <option value="Lebanon">Lebanon</option>
+                        <option value="Lesotho">Lesotho</option>
+                        <option value="Liberia">Liberia</option>
+                        <option value="Libya">Libya</option>
+                        <option value="Liechtenstein">Liechtenstein</option>
+                        <option value="Lithuania">Lithuania</option>
+                        <option value="Luxembourg">Luxembourg</option>
+                        <option value="Madagascar">Madagascar</option>
+                        <option value="Malawi">Malawi</option>
+                        <option value="Malaysia">Malaysia</option>
+                        <option value="Maldives">Maldives</option>
+                        <option value="Mali">Mali</option>
+                        <option value="Malta">Malta</option>
+                        <option value="Marshall Islands">Marshall Islands</option>
+                        <option value="Mauritania">Mauritania</option>
+                        <option value="Mauritius">Mauritius</option>
+                        <option value="Mexico">Mexico</option>
+                        <option value="Micronesia">Micronesia</option>
+                        <option value="Moldova">Moldova</option>
+                        <option value="Monaco">Monaco</option>
+                        <option value="Mongolia">Mongolia</option>
+                        <option value="Montenegro">Montenegro</option>
+                        <option value="Morocco">Morocco</option>
+                        <option value="Mozambique">Mozambique</option>
+                        <option value="Myanmar">Myanmar</option>
+                        <option value="Namibia">Namibia</option>
+                        <option value="Nauru">Nauru</option>
+                        <option value="Nepal">Nepal</option>
+                        <option value="Netherlands">Netherlands</option>
+                        <option value="New Zealand">New Zealand</option>
+                        <option value="Nicaragua">Nicaragua</option>
+                        <option value="Niger">Niger</option>
+                        <option value="Nigeria">Nigeria</option>
+                        <option value="North Korea">North Korea</option>
+                        <option value="North Macedonia">North Macedonia</option>
+                        <option value="Norway">Norway</option>
+                        <option value="Oman">Oman</option>
+                        <option value="Pakistan">Pakistan</option>
+                        <option value="Palau">Palau</option>
+                        <option value="Palestine">Palestine</option>
+                        <option value="Panama">Panama</option>
+                        <option value="Papua New Guinea">Papua New Guinea</option>
+                        <option value="Paraguay">Paraguay</option>
+                        <option value="Peru">Peru</option>
+                        <option value="Philippines">Philippines</option>
+                        <option value="Poland">Poland</option>
+                        <option value="Portugal">Portugal</option>
+                        <option value="Qatar">Qatar</option>
+                        <option value="Romania">Romania</option>
+                        <option value="Russia">Russia</option>
+                        <option value="Rwanda">Rwanda</option>
+                        <option value="Saint Kitts and Nevis">Saint Kitts and Nevis</option>
+                        <option value="Saint Lucia">Saint Lucia</option>
+                        <option value="Saint Vincent and the Grenadines">Saint Vincent and the Grenadines</option>
+                        <option value="Samoa">Samoa</option>
+                        <option value="San Marino">San Marino</option>
+                        <option value="Sao Tome and Principe">Sao Tome and Principe</option>
+                        <option value="Saudi Arabia">Saudi Arabia</option>
+                        <option value="Senegal">Senegal</option>
+                        <option value="Serbia">Serbia</option>
+                        <option value="Seychelles">Seychelles</option>
+                        <option value="Sierra Leone">Sierra Leone</option>
+                        <option value="Singapore">Singapore</option>
+                        <option value="Slovakia">Slovakia</option>
+                        <option value="Slovenia">Slovenia</option>
+                        <option value="Solomon Islands">Solomon Islands</option>
+                        <option value="Somalia">Somalia</option>
+                        <option value="South Africa">South Africa</option>
+                        <option value="South Korea">South Korea</option>
+                        <option value="South Sudan">South Sudan</option>
+                        <option value="Spain">Spain</option>
+                        <option value="Sri Lanka">Sri Lanka</option>
+                        <option value="Sudan">Sudan</option>
+                        <option value="Suriname">Suriname</option>
+                        <option value="Sweden">Sweden</option>
+                        <option value="Switzerland">Switzerland</option>
+                        <option value="Syria">Syria</option>
+                        <option value="Taiwan">Taiwan</option>
+                        <option value="Tajikistan">Tajikistan</option>
+                        <option value="Tanzania">Tanzania</option>
+                        <option value="Thailand">Thailand</option>
+                        <option value="Timor-Leste">Timor-Leste</option>
+                        <option value="Togo">Togo</option>
+                        <option value="Tonga">Tonga</option>
+                        <option value="Trinidad and Tobago">Trinidad and Tobago</option>
+                        <option value="Tunisia">Tunisia</option>
+                        <option value="Turkey">Turkey</option>
+                        <option value="Turkmenistan">Turkmenistan</option>
+                        <option value="Tuvalu">Tuvalu</option>
+                        <option value="Uganda">Uganda</option>
+                        <option value="Ukraine">Ukraine</option>
+                        <option value="United Arab Emirates">United Arab Emirates</option>
+                        <option value="Uruguay">Uruguay</option>
+                        <option value="Uzbekistan">Uzbekistan</option>
+                        <option value="Vanuatu">Vanuatu</option>
+                        <option value="Vatican City">Vatican City</option>
+                        <option value="Venezuela">Venezuela</option>
+                        <option value="Vietnam">Vietnam</option>
+                        <option value="Yemen">Yemen</option>
+                        <option value="Zambia">Zambia</option>
+                        <option value="Zimbabwe">Zimbabwe</option>
+                    </select>
+                </div>
+
+                <button type="submit" class="btn-submit">Start Chatting with DisabilityConnect →</button>
+            </form>
+        </div>
+
+        <!-- Chat Interface -->
+        <div class="chat-section" id="chatSection">
+            <div class="chat-header">
+                <h2>💬 Chat with DisabilityConnect</h2>
+                <p>Ask me about disability services, funding, and support</p>
+            </div>
+            <div class="chat-container" id="chatContainer"></div>
+            <div class="input-area">
+                <div class="input-wrapper">
+                    <textarea id="userInput" rows="2" placeholder="Type your question here..."></textarea>
+                    <button class="btn-send" onclick="sendMessage()">Send</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>DisabilityConnect &copy; 2025 | Created with ❤️ by <a href="https://www.linkedin.com/in/denniskl/" target="_blank">Dennis McMahon</a></p>
+        <p>Need help? Contact: <a href="mailto:dennis.mcmahon@global-buildtech.com">dennis.mcmahon@global-buildtech.com</a></p>
+    </footer>
+
+    <script>
+        // Google Translate
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement({
+                pageLanguage: 'en',
+                includedLanguages: 'en,es,fr,de,it,pt,ar,zh-CN,ja,ko,ru',
+                layout: google.translate.TranslateElement.InlineLayout.SIMPLE
+            }, 'google_translate_element');
+        }
+
+        // Google Sheets configuration
+        const GOOGLE_SHEET_URL = 'https://script.google.com/macros/s/AKfycbw6UyWZ9vIomPXXsIbICrKi1bUrrEFNyCbe3oG_BKRcVFQ1a55QRR0hX_DrZ1Wipn-k/exec';
+
+        let conversationHistory = [];
+        let userData = {};
+
+        // Handle registration form submission
+        document.getElementById('registrationForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+
+            userData = {
+                name: document.getElementById('name').value,
+                email: document.getElementById('email').value,
+                userCountry: document.getElementById('userCountry').value,
+                serviceCountry: document.getElementById('serviceCountry').value,
+                timestamp: new Date().toISOString()
+            };
+
+            // Save to Google Sheets
+            try {
+                await fetch(GOOGLE_SHEET_URL, {
+                    method: 'POST',
+                    mode: 'no-cors',
+                    headers: {
+                        'Content-Type': 'text/plain',
+                    },
+                    body: JSON.stringify(userData)
+                });
+            } catch (error) {
+                console.error('Error saving to Google Sheets:', error);
+            }
+
+            // Show chat interface
+            document.querySelector('.registration-section').style.display = 'none';
+            document.getElementById('chatSection').classList.add('active');
+
+            // Send welcome message
+            const welcomeMsg = `Hello ${userData.name}! 👋\n\nI'm here to help you find disability services in ${userData.serviceCountry}. I can assist with:\n\n• Finding relevant services and programs\n• Understanding eligibility requirements\n• Navigating application processes\n• Connecting with support organizations\n\nWhat would you like to know about?`;
+
+            addMessage(welcomeMsg, 'assistant');
+        });
+
+        // Send message to API
+        async function sendMessage() {
+            const input = document.getElementById('userInput');
+            const message = input.value.trim();
+
+            if (!message) return;
+
+            // Add user message
+            addMessage(message, 'user');
+            input.value = '';
+
+            // Show loading
+            const loadingId = addMessage('', 'assistant', true);
+
+            conversationHistory.push({
+                role: 'user',
+                content: message
+            });
+
+            try {
+                const response = await fetch('/.netlify/functions/chat', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'text/plain'
+                    },
+                    body: JSON.stringify({
+                        messages: conversationHistory,
+                        country: userData.serviceCountry,
+                        userName: userData.name
+                    })
+                });
+
+                const data = await response.json();
+
+                // Remove loading message
+                document.getElementById(loadingId).remove();
+
+                if (data.content && data.content[0]) {
+                    const assistantMessage = data.content[0].text;
+                    addMessage(assistantMessage, 'assistant');
+
+                    conversationHistory.push({
+                        role: 'assistant',
+                        content: assistantMessage
+                    });
+                }
+            } catch (error) {
+                document.getElementById(loadingId).remove();
+                addMessage('Sorry, I encountered an error. Please try again.', 'assistant');
+                console.error('Error:', error);
+            }
+        }
+
+        // Add message to chat
+        function addMessage(text, sender, isLoading = false) {
+            const container = document.getElementById('chatContainer');
+            const messageDiv = document.createElement('div');
+            const id = 'msg-' + Date.now();
+
+            messageDiv.id = id;
+            messageDiv.className = `message ${sender}`;
+
+            const icon = document.createElement('div');
+            icon.className = 'message-icon';
+            icon.textContent = sender === 'assistant' ? '🤝' :
+                userData.name ? userData.name.split(' ')[0].charAt(0).toUpperCase() : 'U';
+
+            const content = document.createElement('div');
+            content.className = 'message-content';
+
+            if (isLoading) {
+                content.innerHTML = '<span class="loading">Thinking</span>';
+            } else {
+                content.textContent = text;
+            }
+
+            messageDiv.appendChild(icon);
+            messageDiv.appendChild(content);
+            container.appendChild(messageDiv);
+            container.scrollTop = container.scrollHeight;
+
+            return id;
+        }
+
+        // Enter key to send
+        document.getElementById('userInput').addEventListener('keydown', function(e) {
+            if (e.key === 'Enter' && !e.shiftKey) {
+                e.preventDefault();
+                sendMessage();
+            }
+        });
+    </script>
+</body>
+</html>
