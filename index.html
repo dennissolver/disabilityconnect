@@ -956,7 +956,7 @@
                         <option value="India">India</option>
                         <option value="Indonesia">Indonesia</option>
                         <option value="Iran">Iran</option>
-                        <option value="Iraq">Iraq</spt>
+                        <option value="Iraq">Iraq</option>
                         <option value="Ireland">Ireland</option>
                         <option value="Israel">Israel</option>
                         <option value="Italy">Italy</option>
@@ -1119,6 +1119,31 @@
         let conversationHistory = [];
         let userData = {};
 
+        // --- NEW: Function to send transcript to the Netlify Function for saving ---
+        async function saveTranscript() {
+            if (conversationHistory.length > 2) { // Only save if there's actual conversation beyond the welcome message
+                try {
+                    // Send the full history and user data to the Netlify Function
+                    await fetch('/.netlify/functions/chat', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'text/plain'
+                        },
+                        body: JSON.stringify({
+                            action: 'save_transcript', // New action for the Netlify Function
+                            email: userData.email,
+                            transcript: conversationHistory,
+                        })
+                    });
+                    console.log('Transcript sent for saving.');
+                } catch (error) {
+                    console.error('Error saving transcript:', error);
+                }
+            }
+        }
+        // -------------------------------------------------------------------------
+
+
         // Handle registration form submission
         document.getElementById('registrationForm').addEventListener('submit', async function(e) {
             e.preventDefault();
@@ -1153,7 +1178,7 @@
             document.querySelector('.registration-section').style.display = 'none';
             document.getElementById('chatSection').classList.add('active');
 
-            // Send welcome message
+            // Send welcome message (This will be the first entry in conversationHistory)
             const locationDetail = userData.city ? ` in ${userData.city}, ${userData.serviceCountry}` : ` in ${userData.serviceCountry}`;
             const welcomeMsg = `Hello ${userData.name}! 👋\n\nI'm here to help you find disability services${locationDetail}. I can assist with:\n\n• Finding relevant services and programs\n• Understanding eligibility requirements\n• Navigating application processes\n• Connecting with support organizations\n\nWhat would you like to know about?`;
 
@@ -1180,19 +1205,19 @@
             });
 
             try {
+                // --- ADDED 'action: chat' to distinguish from 'save_transcript' ---
                 const response = await fetch('/.netlify/functions/chat', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'text/plain'
                     },
                     body: JSON.stringify({
+                        action: 'chat',
                         messages: conversationHistory,
                         country: userData.serviceCountry,
                         userName: userData.name,
-                        // --- NEW FIELDS ADDED TO API CALL ---
                         city: userData.city,
                         postcode: userData.postcode
-                        // ------------------------------------
                     })
                 });
 
@@ -1209,6 +1234,10 @@
                         role: 'assistant',
                         content: assistantMessage
                     });
+
+                    // --- NEW: SAVE THE UPDATED TRANSCRIPT AFTER LLM RESPONSE ---
+                    await saveTranscript();
+                    // --------------------------------------------------------
                 }
             } catch (error) {
                 document.getElementById(loadingId).remove();
@@ -1255,6 +1284,9 @@
                 sendMessage();
             }
         });
+
+        // Set up transcript saving when the user closes the page or leaves
+        window.addEventListener('beforeunload', saveTranscript);
     </script>
 </body>
 </html>

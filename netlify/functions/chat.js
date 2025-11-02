@@ -1,5 +1,9 @@
 const { Anthropic } = require('@anthropic-ai/sdk');  // Destructure for clarity
 
+// --- NEW: Google Apps Script URL (same as frontend) ---
+const GOOGLE_SHEET_URL = 'https://script.google.com/macros/s/AKfycbw6UyWZ9vIomPXXsIbICrKi1bUrrEFNyCbe3oG_BKRcVFQ1a55QRR0hX_DrZ1Wipn-k/exec';
+// --------------------------------------------------------
+
 exports.handler = async (event) => {
     if (event.httpMethod !== 'POST') {
         return {
@@ -9,14 +13,30 @@ exports.handler = async (event) => {
     }
 
     try {
-        // --- NEW: Destructure city and postcode ---
-        const { messages, country, userName, city, postcode } = JSON.parse(event.body);
-        // -----------------------------------------
+        const { action, messages, country, userName, city, postcode, email, transcript } = JSON.parse(event.body);
 
+        // --- NEW: Transcript Saving Dispatch ---
+        if (action === 'save_transcript' && email && transcript) {
+             console.log(`Dispatching transcript save for ${email}`);
+             // Forward the request to the Google Apps Script
+             await fetch(GOOGLE_SHEET_URL, {
+                method: 'POST',
+                // Note: Netlify Functions use a regular fetch, so mode: 'no-cors' is not needed here
+                headers: { 'Content-Type': 'text/plain' },
+                body: JSON.stringify({ action: 'save_transcript', email, transcript })
+            });
+            return {
+                statusCode: 200,
+                body: JSON.stringify({ success: true, message: 'Transcript save initiated.' })
+            };
+        }
+        // ---------------------------------------
+
+        // --- Standard Chat Logic (if action is 'chat' or undefined) ---
         if (!messages || !Array.isArray(messages)) {
             return {
                 statusCode: 400,
-                body: JSON.stringify({ error: 'Invalid request: messages array required' })
+                body: JSON.stringify({ error: 'Invalid request: messages array required for chat action.' })
             };
         }
 
@@ -24,19 +44,16 @@ exports.handler = async (event) => {
             apiKey: process.env.ANTHROPIC_API_KEY
         });
 
-        // --- NEW: Pass city and postcode to system prompt function ---
         const systemPrompt = getSystemPrompt(country, userName, city, postcode);
-        // -------------------------------------------------------------
 
         const response = await anthropic.messages.create({
-            model: 'claude-sonnet-4-5-20250929',  // UPDATED: Latest Sonnet 4.5
+            model: 'claude-sonnet-4-5-20250929',
             max_tokens: 2048,
-            temperature: 0.7,  // ADDED: For empathetic variety
+            temperature: 0.7,
             system: systemPrompt,
             messages: messages
         });
 
-        // FIXED: Trim to expected format { content: [{ text: "..." }] }
         const assistantContent = response.content.filter(item => item.type === 'text').map(item => ({ text: item.text }));
 
         return {
@@ -44,11 +61,11 @@ exports.handler = async (event) => {
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({ content: assistantContent })  // Matches HTML expectation
+            body: JSON.stringify({ content: assistantContent })
         };
 
     } catch (error) {
-        console.error('Error:', error);
+        console.error('Error in chat handler:', error);
         return {
             statusCode: 500,
             body: JSON.stringify({
@@ -59,7 +76,6 @@ exports.handler = async (event) => {
     }
 };
 
-// --- NEW/UPDATED: Function signature and prompt content for location awareness ---
 function getSystemPrompt(country = 'unspecified', userName = 'user', city = 'unspecified city/region', postcode = 'unspecified postcode/zip') {
     return `You are DisabilityConnect, a helpful and empathetic AI assistant that helps ${userName} find disability support services in ${country}.
 
@@ -82,4 +98,3 @@ CONVERSATION APPROACH:
 2. Ask about their specific challenges (mobility, self-care, communication, cognitive, etc.) to tailor the advice.
 3. Be empathetic, concise, and professional. Only provide information that is verifiable or commonly accepted as guidance.`;
 }
-// ---------------------------------------------------------------------------------
